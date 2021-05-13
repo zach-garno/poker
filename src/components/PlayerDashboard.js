@@ -6,7 +6,7 @@ import styled from 'styled-components';
 const StyledPlayerDashboard = styled.div`
   grid-area: player;
   display: grid;
-  grid-template-columns: 25% 50% 25%;
+  grid-template-columns: 10% 50% 40%;
   grid-template-areas: 'playerName playerCards playerOptions';
   #status-wrapper {
     font-family: Courgette;
@@ -21,14 +21,14 @@ const StyledPlayerDashboard = styled.div`
   }
 `;
 
-const PlayerDashboard = ({ data, options, callbacks }) => {
+const PlayerDashboard = ({participantId, data, options, callbacks, Recommendation }) => {
   return (
     <StyledPlayerDashboard>
       <div id="status-wrapper">
         <h4>{`Player${data.active ? '' : ' (folded)'}`}</h4>
       </div>
       <PlayerHand hand={data.hand} />
-      <OptionsPanel options={options} callbacks={callbacks} />
+      <OptionsPanel participantId={participantId} options={options} callbacks={callbacks} Recommendation={Recommendation} />
     </StyledPlayerDashboard>
   );
 };

@@ -47,4 +47,13 @@ const addToTableCards = (oldTableCards, numNewCards) => {
   );
 };
 
-export { createHand, cloneHand, clonePlayerData, shouldHighlight, addToTableCards };
+const addTheseCardsToTableCards = (oldTableCards, newCards) => {
+    let appendThis = [];
+    for(var i = 0; i < newCards.length; i++) {
+      appendThis.push(deck.dealThisCard(newCards[i].value, newCards[i].suit));
+      //deck.dealThisCard(newCards[i].value, newCards[i].suit);
+  }
+  return oldTableCards.concat(appendThis);
+};
+
+export { createHand, cloneHand, clonePlayerData, shouldHighlight, addToTableCards, addTheseCardsToTableCards };

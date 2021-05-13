@@ -64,6 +64,10 @@ class Deck {
     this.remainingCards -= 1;
     return new Card(value, suit);
   }
+  dealThisCard(value, suit) {
+    this.remainingCards -= 1;
+    return new Card(value, suit);
+  }
   
   reset() { 
     this.deck = cloneDeck(baseDeck);

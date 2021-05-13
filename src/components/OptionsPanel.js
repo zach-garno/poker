@@ -4,8 +4,19 @@ import styled from 'styled-components';
 const StyledOptionsPanel = styled.div`
   padding: 10px;
   font-family: Courgette;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  grid-template-columns: 50% 50%;
 
   #PlayerOptions {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    height: 75%;
+    grid-template-columns: 50% 50%;
+  }
+  #AIOptions {
     display: grid;
     justify-items: center;
     align-items: center;
@@ -32,14 +43,42 @@ const StyledButton = styled.button`
   }
 `;
 
-const OptionsPanel = ({ options, callbacks }) => {
+const OptionsPanel = ({participantId, options, callbacks }) => {
+  console.log("options panel")
+  console.log(options.Recommendation);
+  console.log(JSON.stringify(options));
+  console.log("end options panel")
   return (
     <StyledOptionsPanel>
-      <h4>Options</h4>
+      <div>
+      <h4>ParticipantId</h4>
+      <input type="text" onChange={callbacks.SetParticipant} value={`${participantId}`} />
+      <br/>
+      <span>The AI suggests you:&emsp;</span>
+        <span>{options.Recommendation?"call":"fold"}</span>
+      <h4>AI actions</h4>
+      <div id="AIOptions">
+        
+        <StyledButton
+          callback={`${options.Call}`}
+          onClick={() => callbacks.Call('AI')}
+          disabled={!options.Recommendation}>
+          Call
+        </StyledButton>
+        <StyledButton
+          callback={`${options.Fold}`}
+          onClick={() => callbacks.Fold('AI')}
+          disabled={options.Recommendation}>
+          Fold
+        </StyledButton>
+      </div>
+      </div>
+      <div>
+      <h4>Manual Actions</h4>
       <div id="PlayerOptions">
         <StyledButton
           callback={`${options.Deal}`}
-          onClick={() => callbacks.Deal('player')}
+          onClick={() => callbacks.Deal()}
           disabled={!options.Deal}>
           Deal
         </StyledButton>
@@ -60,7 +99,7 @@ const OptionsPanel = ({ options, callbacks }) => {
           onClick={() => callbacks.Fold('player')}
           disabled={!options.Fold}>
           Fold
-        </StyledButton>
+        </StyledButton></div>
       </div>
     </StyledOptionsPanel>
   );
